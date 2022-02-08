@@ -1,5 +1,11 @@
+/**
+ * Full-Stack Software Engineering
+ * Javascript Syntax, Part II
+ * Credit Card Checker
+ */
+
 // All valid credit card numbers
-            //  2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1,
+//  2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1,
 const valid1 = [4, 5, 3, 9, 6, 7, 7, 9, 0, 8, 0, 1, 6, 8, 0, 8];
 const valid2 = [5, 5, 3, 5, 7, 6, 6, 7, 6, 8, 7, 5, 1, 4, 3, 9];
 const valid3 = [3, 7, 1, 6, 1, 2, 0, 1, 9, 9, 8, 5, 2, 3, 6];
@@ -22,41 +28,41 @@ const mystery5 = [4, 9, 1, 3, 5, 4, 0, 4, 6, 3, 0, 7, 2, 5, 2, 3];
 
 // An array of all the arrays above
 const batch = [
-    valid1,
-    valid2,
-    valid3,
-    valid4,
-    valid5,
-    invalid1,
-    invalid2,
-    invalid3,
-    invalid4,
-    invalid5,
-    mystery1,
-    mystery2,
-    mystery3,
-    mystery4,
-    mystery5,
+  valid1,
+  valid2,
+  valid3,
+  valid4,
+  valid5,
+  invalid1,
+  invalid2,
+  invalid3,
+  invalid4,
+  invalid5,
+  mystery1,
+  mystery2,
+  mystery3,
+  mystery4,
+  mystery5,
 ];
 
 // Add your functions below:
 const validateCred = (arr) => {
-    let index = 0;
-    let newArray = arr.reverse().map((num) => {
-        if (arr.indexOf(num, index) % 2 !== 0) {
-            index++;
-            return num * 2 > 9 ? num * 2 - 9 : num * 2;
-        } else {
-            index++;
-            return num;
-        }
-    });
+  let index = 0;
+  let newArray = arr.reverse().map((num) => {
+    if (arr.indexOf(num, index) % 2 !== 0) {
+      index++;
+      return num * 2 > 9 ? num * 2 - 9 : num * 2;
+    } else {
+      index++;
+      return num;
+    }
+  });
 
-    let sum = newArray.reduce((ac, cv) => {
-        return ac + cv;
-    });
+  let sum = newArray.reduce((ac, cv) => {
+    return ac + cv;
+  });
 
-    return sum % 10 === 0;
+  return sum % 10 === 0;
 };
 
 //valid test
@@ -73,13 +79,13 @@ const validateCred = (arr) => {
 // console.log(validateCred(invalid5));
 
 const findInvalidCards = (nestedArray) => {
-    let invalidCards = [];
-    for (let arr of nestedArray) {
-        if (validateCred(arr) === false) {
-            invalidCards.push(arr);
-        }
+  let invalidCards = [];
+  for (let arr of nestedArray) {
+    if (validateCred(arr) === false) {
+      invalidCards.push(arr);
     }
-    return invalidCards;
+  }
+  return invalidCards;
 };
 
 // test find invalid cards
@@ -88,31 +94,31 @@ const findInvalidCards = (nestedArray) => {
 const invalidCardsArray = findInvalidCards(batch);
 
 const idInvalidCardCompanies = (invalidCards) => {
-    let companyArray = [];
-    invalidCards.forEach((arr) => {
-        let company = "";
-        switch (arr[0]) {
-            case 3:
-                company = "Amex (American Express)";
-                break;
-            case 4:
-                company = "Visa";
-                break;
-            case 5:
-                company = "Mastercard";
-                break;
-            case 6:
-                company = "Discover";
-                break;
-            default:
-                company = "Company not found";
-                break;
-        }
-        return companyArray.push(company);
-    });
+  let companyArray = [];
+  invalidCards.forEach((arr) => {
+    let company = "";
+    switch (arr[0]) {
+      case 3:
+        company = "Amex (American Express)";
+        break;
+      case 4:
+        company = "Visa";
+        break;
+      case 5:
+        company = "Mastercard";
+        break;
+      case 6:
+        company = "Discover";
+        break;
+      default:
+        company = "Company not found";
+        break;
+    }
+    return companyArray.push(company);
+  });
 
-    let invalidCardCompany = [...new Set(companyArray)];
-    return invalidCardCompany;
+  let invalidCardCompany = [...new Set(companyArray)];
+  return invalidCardCompany;
 };
 
 console.log(`ids: `, idInvalidCardCompanies(invalidCardsArray));
